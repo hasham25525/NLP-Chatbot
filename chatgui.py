@@ -117,6 +117,8 @@ def send():
 
 #Create Chat window
 ChatLog = Text(base, bd=0, bg="#333", height="10", width="50", font="Verdana",)
+# ChatLog = Text(base, bd=0, bg="white", height="10", width="50", font="Verdana")
+
 
 ChatLog.config(state=DISABLED)
 
@@ -134,53 +136,25 @@ EntryBox = Text(base, bd=0, bg="#333",width="29", height="3", font="Verdana", fg
 EntryBox.bind("<Return>", send)
 
 
-#Place all components on the screen
-scrollbar.place(x=376,y=6, height=386)
-ChatLog.place(x=6,y=6, height=386, width=370)
+
+# Place all components on the screen
+scrollbar.place(x=376, y=6, height=386)
+ChatLog.place(x=6, y=6, height=386, width=370)
 EntryBox.place(x=128, y=401, height=90, width=265)
 SendButton.place(x=5, y=401, height=90)
 
+# Set GUI background to white
+base.configure(bg='white')
+
+# Calculate the center of the screen
+screen_width = base.winfo_screenwidth()
+screen_height = base.winfo_screenheight()
+x_coordinate = (screen_width / 2) - (400 / 2)
+y_coordinate = (screen_height / 2) - (500 / 2)
+
+# Set the GUI window to open in the center
+base.geometry(f"400x500+{int(x_coordinate)}+{int(y_coordinate)}")
+
+# Rest of your existing code...
 base.mainloop()
-
-
-# import tkinter as tk
-# from tkinter import Text, Scrollbar, Entry, Button, END
-
-# # Your existing code here...
-
-# # Create Chat window
-# ChatLog = Text(base, bd=0, bg="white", height="10", width="50", font="Verdana")
-
-# # Bind scrollbar to Chat window
-# scrollbar = Scrollbar(base, command=ChatLog.yview, cursor="heart")
-# ChatLog['yscrollcommand'] = scrollbar.set
-
-# # Create Button to send message
-# SendButton = Button(base, font=("Verdana", 10, 'bold'), text="Send", width="12", height="3",
-#                     bd=0, bg="#579822", activebackground="#4f8721", fg='#ffffff', activeforeground="#ffffff",
-#                     command=send)
-
-# # Create the box to enter message
-# EntryBox = Entry(base, bd=0, bg="white", width="29", font="Verdana", fg='#000000')
-
-# # Place all components on the screen
-# scrollbar.place(x=376, y=6, height=386)
-# ChatLog.place(x=6, y=6, height=386, width=370)
-# EntryBox.place(x=128, y=401, height=90, width=265)
-# SendButton.place(x=5, y=401, height=90)
-
-# # Set GUI background to white
-# base.configure(bg='white')
-
-# # Calculate the center of the screen
-# screen_width = base.winfo_screenwidth()
-# screen_height = base.winfo_screenheight()
-# x_coordinate = (screen_width / 2) - (400 / 2)
-# y_coordinate = (screen_height / 2) - (500 / 2)
-
-# # Set the GUI window to open in the center
-# base.geometry(f"400x500+{int(x_coordinate)}+{int(y_coordinate)}")
-
-# # Rest of your existing code...
-# base.mainloop()
 

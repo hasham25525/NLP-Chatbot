@@ -1,0 +1,134 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": [
+        "Hi",
+        "Hey",
+        "How are you",
+        "Is anyone there?",
+        "Hello",
+        "Good day"
+      ],
+      "responses": [
+        "Hey :-)",
+        "Hello, thanks for visiting",
+        "Hi there, what can I do for you?",
+        "Hi there, how can I help?",
+        "Is there anything I can help you."
+      ]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": ["Bye", "See you later", "Goodbye"],
+      "responses": [
+        "See you later, thanks for visiting",
+        "Have a nice day",
+        "Bye! Come back again soon.",
+        "Nice Meeting you, hope I see you back soon."
+      ]
+    },
+    {
+      "tag": "thanks",
+      "patterns": ["Thanks", "Thank you", "That's helpful", "Thank's a lot!"],
+      "responses": ["Happy to help!",
+                    "Any time!",
+                    "My pleasure",
+                    "Never mention, I am more thankful you contacted us.",
+                    "Sure! You can contact us anytime."
+                    ]
+    },
+    {
+      "tag": "items",
+      "patterns": [
+        "Which items do you have?",
+        "What kinds of items are there?",
+        "What do you sell?",
+        "What can I get from you?",
+        "What is avaiable?",
+        "What is on the menu?"
+      ],
+      "responses": [
+        "We sell both veg and chicken pizzas.",
+        "You can get veg and finger licking chicken pizzas.",
+        "If you are non-veg we can deliver you chicken pizza if not veg pizza is also on the menu."
+      ]
+    },
+    {
+      "tag": "payments",
+      "patterns": [
+        "Do you take credit cards?",
+        "Do you accept paytm?",
+        "Can I pay with googlepay?",
+        "Are you cash only?",
+        "Do you accept online payment.",
+        "Can I order pay on delivery"
+      ],
+      "responses": [
+        "We accept paytm, googlepay and COD",
+        "You either paytm and googlepay us or can pay in cash",
+        "If you don't use online payment method you can pay us in cash, and if you do you may paytm or googlepay us.",
+        "For customers convinience we accept paytm, googlepay and cash."
+      ]
+    },
+    {
+      "tag": "delivery",
+      "patterns": [
+        "Can you deliver the pizzas?",
+        "Do you make delivery?",
+        "Is delivery avaiable?"
+      ],
+      "responses": [
+        "We deliver on every doorsteps",
+        "Of course! We would be glad to deliver it to your address.",
+        "We deliver 24/7 in every places all over India."
+      ]
+    },
+    {
+      "tag": "special",
+      "patterns": [
+        "What is special on the menu?",
+        "Do you have any special?",
+        "What do you recommend?",
+        "What's todays special?",
+        "Recommend me special Pizza?"
+      ],
+      "responses": [
+        "As per costumer reviews we recommend you to try New York Chicken Pizza.",
+        "New York Chicken Pizza is liked by most of the costumers.",
+        "You definitely should try New York Chicken Pizza.",
+        "You will never regret trying New York Chicken Pizza."
+      ]
+    },
+    {
+      "tag": "veg_cost",
+      "patterns": [
+        "How much does veg pizza cost?",
+        "Can I know the price of veg pizza?",
+        "I much do I pay for veg pizza?",
+        "What is the cost of veg pizza?",
+        "What is the price of veg pizza?"
+      ],
+      "responses": [
+        "It is Rs.299 for Small Rs.399 for Medium and Rs.449 for Large.",
+        "You can get small for Rs.299, Medium for Rs.399 and Large for Rs.449.",
+        "The prices are Small-Rs.299,Medium-Rs.399 and Large-Rs.449."
+      ]
+    },
+     {
+      "tag": "chicken_cost",
+      "patterns": [
+        "How much does chicken pizza cost?",
+        "Can I know the price of chicken pizza?",
+        "I much do I pay for chicken pizza?",
+        "What is the cost of chicken pizza?",
+        "What is the price of chicken pizza?"
+      ],
+      "responses": [
+        "It is Rs.349 for Small Rs.449 for Medium and Rs.549 for Large.",
+        "You can get small for Rs.349, Medium for Rs.449 and Large for Rs.549.",
+        "The prices are Small-Rs.349,Medium-Rs.449 and Large-Rs.549."
+      ]
+    }
+  ]
+}

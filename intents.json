@@ -5,13 +5,12 @@
       "patterns": [
         "Hi",
         "Hey",
-        "How are you",
         "Is anyone there?",
         "Hello",
         "Good day"
       ],
       "responses": [
-        "Hey :-)",
+        
         "Hello, thanks for visiting",
         "Hi there, what can I do for you?",
         "Hi there, how can I help?",
@@ -128,6 +127,30 @@
         "It is Rs.349 for Small Rs.449 for Medium and Rs.549 for Large.",
         "You can get small for Rs.349, Medium for Rs.449 and Large for Rs.549.",
         "The prices are Small-Rs.349,Medium-Rs.449 and Large-Rs.549."
+      ]
+    },
+    {
+      "tag":"greeting_2",
+      "patterns":[
+        "How are you",
+        "How r u?"
+      ],
+      "responses":[
+        "Fine, What can I Get for you"
+
+      ]
+    },
+    {
+      "tag":"places_order",
+      "patterns":[
+        "Small",
+        "Large",
+        "Medium"
+        
+      ],
+      "responses":[
+        "Your order is Placed. "
+
       ]
     }
   ]

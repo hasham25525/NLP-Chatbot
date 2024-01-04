@@ -4,6 +4,7 @@ lemmatizer = WordNetLemmatizer()
 import pickle
 import numpy as np
 
+
 from keras.models import load_model
 model = load_model('chatbot_model.h5')
 import json
@@ -85,8 +86,6 @@ def chatbot_response(msg):
     
     return res
 
-
-
 # #Creating GUI with tkinter
 import tkinter
 from tkinter import *
@@ -116,7 +115,7 @@ def send():
 
 
 #Create Chat window
-ChatLog = Text(base, bd=0, bg="#333", height="10", width="50", font="Verdana",)
+ChatLog = Text(base, bd=0, bg="#333", height="10", width="50", font="Verdana")
 # ChatLog = Text(base, bd=0, bg="white", height="10", width="50", font="Verdana")
 
 

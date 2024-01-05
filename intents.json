@@ -152,6 +152,19 @@
         "Your order is Placed. "
 
       ]
+    },
+    {
+      "tag":"active_hours",
+      "patterns":[
+        "timings?",
+        "when are you open?",
+        "when are you availabe?"
+        
+      ],
+      "responses":[
+        "We are open from Monday to Friday 3pm to 12am. "
+
+      ]
     }
   ]
 }

@@ -18,6 +18,20 @@
       ]
     },
     {
+      "tag":"know_me",
+      "patterns":[
+        
+        "who are you?",
+        "what are you?",
+        "what can you do?"
+        
+      ],
+      "responses":[
+        "I'm Pizza ordering chatbot from The Pizza Shop, what can I do for you?"
+
+      ]
+    },
+    {
       "tag": "goodbye",
       "patterns": ["Bye", "See you later", "Goodbye"],
       "responses": [
@@ -45,7 +59,8 @@
         "What do you sell?",
         "What can I get from you?",
         "What is avaiable?",
-        "What is on the menu?"
+        "What is on the menu?",
+        "what can you do?"
       ],
       "responses": [
         "We sell both veg and chicken pizzas.",

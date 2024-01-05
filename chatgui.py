@@ -132,7 +132,7 @@ SendButton = Button(base, font=("Verdana",10,'bold'), text="Send", width="12", h
 
 #Create the box to enter message
 EntryBox = Text(base, bd=0, bg="#333",width="29", height="3", font="Verdana", fg='#ffffff')
-EntryBox.bind("<Return>", send)
+# EntryBox.bind("<Return>", send)
 
 
 

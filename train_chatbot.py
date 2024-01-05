@@ -1,3 +1,4 @@
+import time
 import nltk
 from nltk.stem import WordNetLemmatizer
 lemmatizer = WordNetLemmatizer()
@@ -10,6 +11,12 @@ from keras.models import Sequential
 from keras.layers import Dense, Activation, Dropout
 from keras.optimizers import SGD
 import random
+
+import psutil
+
+
+
+start_time = time.time()
 
 words=[]
 classes = []
@@ -87,12 +94,30 @@ model.add(Dense(64, activation='relu'))
 model.add(Dropout(0.5))
 model.add(Dense(len(train_y[0]), activation='softmax'))
 
-# Compile model. Stochastic gradient descent with Nesterov accelerated gradient gives good results for this model
+# Compile model. S with Nesterov accelerated gradient gives good results for this model
 sgd = tf.keras.optimizers.legacy.SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
 model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
+
+#  Experiment with data shuffling
+# random.seed(42)  # Set a seed for reproducibility
+# random.shuffle(training)
+# model.fit(np.array(train_x), np.array(train_y), epochs=200, batch_size=5, verbose=1)
 
 #fitting and saving the model 
 hist = model.fit(np.array(train_x), np.array(train_y), epochs=200, batch_size=5, verbose=1)
 model.save('chatbot_model.h5', hist)
 
 print("model created")
+
+end_time = time.time()
+# Calculate training duration
+training_duration = end_time - start_time
+print(f"Training Duration: {training_duration} seconds")
+
+
+# Monitor CPU and memory usage
+cpu_usage_percent = psutil.cpu_percent()
+memory_usage_percent = psutil.virtual_memory().percent
+print(f"CPU Usage: {cpu_usage_percent}% | Memory Usage: {memory_usage_percent}%")
+
+

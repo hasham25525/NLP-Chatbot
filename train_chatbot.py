@@ -76,12 +76,24 @@ for doc in documents:
     output_row[classes.index(doc[1])] = 1
     
     training.append([bag, output_row])
+
 # shuffle our features and turn into np.array
 random.shuffle(training)
 training = np.array(training , dtype=object)
-# create train and test lists. X - patterns, Y - intents
-train_x = list(training[:,0])
-train_y = list(training[:,1])
+
+# Split the data into training and validation sets
+split_ratio = 0.8  # Adjust the split ratio as needed
+split_index = int(len(training) * split_ratio)
+
+train_data = training[:split_index]
+validation_data = training[split_index:]
+
+# Extract features (X) and labels (Y) for training and validation sets
+train_x = list(train_data[:, 0])
+train_y = list(train_data[:, 1])
+
+validation_x = list(validation_data[:, 0])
+validation_y = list(validation_data[:, 1])    
 print("Training data created")
 
 
@@ -94,7 +106,7 @@ model.add(Dense(64, activation='relu'))
 model.add(Dropout(0.5))
 model.add(Dense(len(train_y[0]), activation='softmax'))
 
-# Compile model. S with Nesterov accelerated gradient gives good results for this model
+# Compile model. SGD with Nesterov accelerated gradient gives good results for this model
 sgd = tf.keras.optimizers.legacy.SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
 model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
 
@@ -108,6 +120,18 @@ hist = model.fit(np.array(train_x), np.array(train_y), epochs=200, batch_size=5,
 model.save('chatbot_model.h5', hist)
 
 print("model created")
+
+
+# Experiment with different batch sizes and epochs
+batch_sizes = [8, 16, 32]
+epochs_values = [50, 100, 200]
+
+for batch_size in batch_sizes:
+    for epochs_value in epochs_values:
+        model.fit(np.array(train_x), np.array(train_y), epochs=epochs_value, batch_size=batch_size, verbose=0)
+        evaluation_metrics = model.evaluate(np.array(validation_x), np.array(validation_y), verbose=0)
+        print(f"Batch Size: {batch_size}, Epochs: {epochs_value}, Metrics: {evaluation_metrics}")
+
 
 end_time = time.time()
 # Calculate training duration

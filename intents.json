@@ -57,12 +57,16 @@
         "What can I get from you?",
         "What is avaiable?",
         "What is on the menu?",
-        "what can you do?"
+        "what can you do?",
+        "how can you help me?",
+        "get me a pizza",
+        "i want a pizza"
       ],
       "responses": [
         "We sell both veg and chicken pizzas.",
         "You can get veg and finger licking chicken pizzas.",
         "If you are non-veg we can deliver you chicken pizza if not veg pizza is also on the menu."
+        
       ]
     },
     {
@@ -114,11 +118,16 @@
     {
       "tag": "veg_cost",
       "patterns": [
+        "get me a veg pizza",
+        "i want a veg pizza",
+        "i want a vegetertain pizza",
+        "i am vegitarian",
         "How much does veg pizza cost?",
         "Can I know the price of veg pizza?",
         "I much do I pay for veg pizza?",
         "What is the cost of veg pizza?",
         "What is the price of veg pizza?"
+        
       ],
       "responses": [
         "Veg Pizza is Rs.299 for Small Rs.399 for Medium and Rs.449 for Large.",
@@ -138,6 +147,9 @@
      {
       "tag": "chicken_cost",
       "patterns": [
+        "get me a chicken pizza",
+        "i want a chicken pizza",
+        "i love meat",
         "How much does chicken pizza cost?",
         "Can I know the price of chicken pizza?",
         "I much do I pay for chicken pizza?",
@@ -153,8 +165,8 @@
     {
       "tag":"greeting_2",
       "patterns":[
-        "How are you",
-        "How r u?"
+        "How are you?",
+        "How are you today?"
       ],
       "responses":[
         "Fine, What can I Get for you"
@@ -202,12 +214,10 @@
     {
       "tag":"info",
       "patterns":[
-        "what is your address?",
-        "what is your contact?"
+        "address?"
               
       ],
       "responses":[
-        "Our Contact is +25252525252 ",
         "Our address is New York, 12th Street"
 
       ]

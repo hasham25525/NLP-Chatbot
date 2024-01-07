@@ -80,20 +80,9 @@ for doc in documents:
 # shuffle our features and turn into np.array
 random.shuffle(training)
 training = np.array(training , dtype=object)
-
-# Split the data into training and validation sets
-split_ratio = 0.8  # Adjust the split ratio as needed
-split_index = int(len(training) * split_ratio)
-
-train_data = training[:split_index]
-validation_data = training[split_index:]
-
-# Extract features (X) and labels (Y) for training and validation sets
-train_x = list(train_data[:, 0])
-train_y = list(train_data[:, 1])
-
-validation_x = list(validation_data[:, 0])
-validation_y = list(validation_data[:, 1])    
+# create train and test lists. X - patterns, Y - intents
+train_x = list(training[:,0])
+train_y = list(training[:,1])   
 print("Training data created")
 
 

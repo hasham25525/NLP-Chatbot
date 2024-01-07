@@ -78,7 +78,7 @@ def chatbot_response(msg):
     else:
         # If the input is not from the dataset, provide a generative response
         generative_responses = [
-            "I'm not sure I understand. Could you please provide more details?",
+            "I can't understand. Could you please provide more details?",
             "Sorry, I didn't get that. Can you rephrase your question?",
             "It seems I'm not familiar with that. Can you ask something else?"            
         ]
@@ -95,16 +95,16 @@ base = Tk()
 base.title("The Pizza Shop ")
 base.geometry("400x500")
 base.resizable(width=FALSE, height=FALSE)
-base.configure(bg='#333')
+base.configure(bg='#f5f5f5') 
 
-def send():
-    msg = EntryBox.get("1.0",'end-1c').strip()
+def send(event=None):  
+    msg = EntryBox.get("1.0", 'end-1c').strip()
     EntryBox.delete("0.0",END)
 
     if msg != '':
         ChatLog.config(state=NORMAL)
         ChatLog.insert(END, "You: " + msg + '\n')
-        ChatLog.config(foreground="#fff", font=("Verdana", 12, "bold" ))
+        ChatLog.config(foreground="#000", font=("Verdana", 12, "bold" ))
     
         res = chatbot_response(msg)
         ChatLog.insert(END, "Bot: " + res + '\n\n\n')
@@ -115,14 +115,14 @@ def send():
 
 
 #Create Chat window
-ChatLog = Text(base, bd=0, bg="#333", height="10", width="50", font="Verdana")
+ChatLog = Text(base, bd=0, bg="#f2f2f2", height="10", width="50", font="Verdana")
 # ChatLog = Text(base, bd=0, bg="white", height="10", width="50", font="Verdana")
 
 
 ChatLog.config(state=DISABLED)
 
 #Bind scrollbar to Chat window
-scrollbar = Scrollbar(base.configure(bg="#333"), command=ChatLog.yview, cursor="heart")
+scrollbar = Scrollbar(base.configure(bg="#f2f2f2"), command=ChatLog.yview, cursor="heart")
 ChatLog['yscrollcommand'] = scrollbar.set
 
 #Create Button to send message
@@ -131,16 +131,16 @@ SendButton = Button(base, font=("Verdana",10,'bold'), text="Send", width="12", h
                     command= send )
 
 #Create the box to enter message
-EntryBox = Text(base, bd=0, bg="#333",width="29", height="3", font="Verdana", fg='#ffffff')
-# EntryBox.bind("<Return>", send)
+EntryBox = Text(base, bd=0, bg="#fff",width="29", height="3", font="Verdana", fg='#000')
+EntryBox.bind("<Return>", send)
 
 
 
 # Place all components on the screen
 scrollbar.place(x=376, y=6, height=386)
 ChatLog.place(x=6, y=6, height=386, width=370)
-EntryBox.place(x=128, y=401, height=90, width=265)
-SendButton.place(x=5, y=401, height=90)
+EntryBox.place(x=6, y=401, height=90, width=265)
+SendButton.place(x=275, y=401, height=90) 
 
 # Set GUI background to white
 base.configure(bg='white')

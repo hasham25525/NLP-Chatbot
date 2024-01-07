@@ -180,6 +180,23 @@
         "We are open from Monday to Friday 3pm to 12am. "
 
       ]
+    },
+    {
+      "tag":"bad_service",
+      "patterns":[
+        "bad?",
+        "your pizza is not good ",
+        "i hate your pizza",
+        "i did not like your service",
+        "i got a cold pizza",
+        "i did not get it on time"
+        
+      ],
+      "responses":[
+        "We are sorry for inconvinience ",
+        "Sorry, we will try better"
+
+      ]
     }
   ]
 }

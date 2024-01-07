@@ -123,14 +123,14 @@ print("model created")
 
 
 # Experiment with different batch sizes and epochs
-batch_sizes = [8, 16, 32]
-epochs_values = [50, 100, 200]
+# batch_sizes = [8, 16, 32]
+# epochs_values = [50, 100, 200]
 
-for batch_size in batch_sizes:
-    for epochs_value in epochs_values:
-        model.fit(np.array(train_x), np.array(train_y), epochs=epochs_value, batch_size=batch_size, verbose=0)
-        evaluation_metrics = model.evaluate(np.array(validation_x), np.array(validation_y), verbose=0)
-        print(f"Batch Size: {batch_size}, Epochs: {epochs_value}, Metrics: {evaluation_metrics}")
+# for batch_size in batch_sizes:
+#     for epochs_value in epochs_values:
+#         model.fit(np.array(train_x), np.array(train_y), epochs=epochs_value, batch_size=batch_size, verbose=0)
+#         evaluation_metrics = model.evaluate(np.array(validation_x), np.array(validation_y), verbose=0)
+#         print(f"Batch Size: {batch_size}, Epochs: {epochs_value}, Metrics: {evaluation_metrics}")
 
 
 end_time = time.time()

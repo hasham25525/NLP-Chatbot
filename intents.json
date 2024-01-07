@@ -11,10 +11,7 @@
       ],
       "responses": [
         
-        "Hello, thanks for visiting",
-        "Hi there, what can I do for you?",
-        "Hi there, how can I help?",
-        "Is there anything I can help you."
+       "Welcome to Pizza Shop, how can I help you?"
       ]
     },
     {
@@ -124,9 +121,18 @@
         "What is the price of veg pizza?"
       ],
       "responses": [
-        "It is Rs.299 for Small Rs.399 for Medium and Rs.449 for Large.",
+        "Veg Pizza is Rs.299 for Small Rs.399 for Medium and Rs.449 for Large.",
         "You can get small for Rs.299, Medium for Rs.399 and Large for Rs.449.",
-        "The prices are Small-Rs.299,Medium-Rs.399 and Large-Rs.449."
+        "The prices of Veg Pizza are Small-Rs.299,Medium-Rs.399 and Large-Rs.449."
+      ]
+    },{
+      "tag": "cost",
+      "patterns": [
+        "what are the cost?",
+        "How much is your pizza?"
+      ],
+      "responses": [
+        "Which one Chicken or Veg?"
       ]
     },
      {
@@ -139,9 +145,9 @@
         "What is the price of chicken pizza?"
       ],
       "responses": [
-        "It is Rs.349 for Small Rs.449 for Medium and Rs.549 for Large.",
+        "Chicken Pizza is Rs.349 for Small Rs.449 for Medium and Rs.549 for Large.",
         "You can get small for Rs.349, Medium for Rs.449 and Large for Rs.549.",
-        "The prices are Small-Rs.349,Medium-Rs.449 and Large-Rs.549."
+        "The prices of Chicken Pizza are Small-Rs.349,Medium-Rs.449 and Large-Rs.549."
       ]
     },
     {
@@ -178,6 +184,31 @@
       ],
       "responses":[
         "We are open from Monday to Friday 3pm to 12am. "
+
+      ]
+    },
+    {
+      "tag":"deals",
+      "patterns":[
+        "is there any deal available?",
+        "any deal for today?"
+              
+      ],
+      "responses":[
+        "Yes, we are offering Midnight deal available after midnight."
+
+      ]
+    },
+    {
+      "tag":"info",
+      "patterns":[
+        "what is your address?",
+        "what is your contact?"
+              
+      ],
+      "responses":[
+        "Our Contact is +25252525252 ",
+        "Our address is New York, 12th Street"
 
       ]
     },

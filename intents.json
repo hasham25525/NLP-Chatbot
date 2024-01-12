@@ -178,7 +178,8 @@
       "patterns":[
         "Small",
         "Large",
-        "Medium"
+        "Medium",
+        "small"
         
       ],
       "responses":[
@@ -212,13 +213,25 @@
       ]
     },
     {
-      "tag":"info",
+      "tag":"address",
       "patterns":[
         "address?"
               
       ],
       "responses":[
         "Our address is New York, 12th Street"
+
+      ]
+    },
+    {
+      "tag":"contact",
+      "patterns":[
+        "what is your contact?",
+        "give me your contact details"
+              
+      ],
+      "responses":[
+        "Our contact is +9245454545"
 
       ]
     },

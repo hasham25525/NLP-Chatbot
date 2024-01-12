@@ -1,136 +1,110 @@
-import time
 import nltk
 from nltk.stem import WordNetLemmatizer
-lemmatizer = WordNetLemmatizer()
 import json
 import pickle
 import tensorflow as tf
-
-import numpy as np
-from keras.models import Sequential
-from keras.layers import Dense, Activation, Dropout
-from keras.optimizers import SGD
 import random
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Activation, Dropout
+from tensorflow.keras.optimizers import SGD
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import confusion_matrix
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 
-import psutil
+# Disable eager execution
+tf.compat.v1.disable_eager_execution()
 
-
-
-start_time = time.time()
-
-words=[]
-classes = []
-documents = []
-ignore_words = ['?', '!']
+# Load intent data
 data_file = open('intents.json').read()
 intents = json.loads(data_file)
 
+# Rest of your code...
+# Preprocess and prepare data
+words = []
+classes = []
+documents = []
+ignore_words = ['?', '!']
 
 for intent in intents['intents']:
     for pattern in intent['patterns']:
-
-        #tokenize each word
+        # Tokenize each word
         w = nltk.word_tokenize(pattern)
         words.extend(w)
-        #add documents in the corpus
+        # Add documents to the corpus
         documents.append((w, intent['tag']))
-
-        # add to our classes list
+        # Add to classes list
         if intent['tag'] not in classes:
             classes.append(intent['tag'])
 
-# lemmaztize and lower each word and remove duplicates
-words = [lemmatizer.lemmatize(w.lower()) for w in words if w not in ignore_words]
+# Lemmatize and lowercase each word, and remove duplicates
+words = [WordNetLemmatizer().lemmatize(w.lower()) for w in words if w not in ignore_words]
 words = sorted(list(set(words)))
-# sort classes
 classes = sorted(list(set(classes)))
-# documents = combination between patterns and intents
-print (len(documents), "documents")
-# classes = intents
-print (len(classes), "classes", classes)
-# words = all words, vocabulary
-print (len(words), "unique lemmatized words", words)
 
-
-pickle.dump(words,open('words.pkl','wb'))
-pickle.dump(classes,open('classes.pkl','wb'))
-
-# create our training data
+# Create training data
 training = []
-# create an empty array for our output
 output_empty = [0] * len(classes)
-# training set, bag of words for each sentence
+
 for doc in documents:
-    # initialize our bag of words
     bag = []
-    # list of tokenized words for the pattern
     pattern_words = doc[0]
-    # lemmatize each word - create base word, in attempt to represent related words
-    pattern_words = [lemmatizer.lemmatize(word.lower()) for word in pattern_words]
-    # create our bag of words array with 1, if word match found in current pattern
+    pattern_words = [WordNetLemmatizer().lemmatize(word.lower()) for word in pattern_words]
     for w in words:
         bag.append(1) if w in pattern_words else bag.append(0)
-    
-    # output is a '0' for each tag and '1' for current tag (for each pattern)
+
     output_row = list(output_empty)
     output_row[classes.index(doc[1])] = 1
-    
     training.append([bag, output_row])
 
-# shuffle our features and turn into np.array
+# Shuffle and convert to numpy array
 random.shuffle(training)
-training = np.array(training , dtype=object)
-# create train and test lists. X - patterns, Y - intents
-train_x = list(training[:,0])
-train_y = list(training[:,1])   
-print("Training data created")
+training = np.array(training, dtype=object)
 
+# Split data into features and labels
+X = np.array([entry[0] for entry in training])
+y = np.array([entry[1] for entry in training])
 
-# Create model - 3 layers. First layer 128 neurons, second layer 64 neurons and 3rd output layer contains number of neurons
-# equal to number of intents to predict output intent with softmax
+# Split data into training and validation sets
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Build the model
 model = Sequential()
-model.add(Dense(128, input_shape=(len(train_x[0]),), activation='relu'))
+model.add(Dense(128, input_shape=(len(X_train[0]),), activation='relu'))
 model.add(Dropout(0.5))
 model.add(Dense(64, activation='relu'))
 model.add(Dropout(0.5))
-model.add(Dense(len(train_y[0]), activation='softmax'))
+model.add(Dense(len(y_train[0]), activation='softmax'))
 
-# Compile model. SGD with Nesterov accelerated gradient gives good results for this model
-sgd = tf.keras.optimizers.legacy.SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
+# Compile the model
+sgd = tf.keras.optimizers.SGD(learning_rate=0.01, momentum=0.9, nesterov=True)
 model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
 
-#  Experiment with data shuffling
-# random.seed(42)  # Set a seed for reproducibility
-# random.shuffle(training)
-# model.fit(np.array(train_x), np.array(train_y), epochs=200, batch_size=5, verbose=1)
 
-#fitting and saving the model 
-hist = model.fit(np.array(train_x), np.array(train_y), epochs=200, batch_size=5, verbose=1)
-model.save('chatbot_model.h5', hist)
+# Train the model
+model.compile(loss='categorical_crossentropy', optimizer='sgd', metrics=['accuracy'])
+history = model.fit(X_train, y_train, epochs=200, batch_size=5, validation_data=(X_val, y_val), verbose=1)
 
-print("model created")
+# Save the model
+model.save('chatbot_model.h5')
 
+# Evaluate the model on the validation set
+loss, accuracy = model.evaluate(X_val, y_val, verbose=1)
+print(f"Validation Loss: {loss}, Validation Accuracy: {accuracy}")
 
-# Experiment with different batch sizes and epochs
-# batch_sizes = [8, 16, 32]
-# epochs_values = [50, 100, 200]
+# Predictions on the validation set
+predictions = model.predict(X_val)
+predicted_labels = np.argmax(predictions, axis=1)
+true_labels = np.argmax(y_val, axis=1)
 
-# for batch_size in batch_sizes:
-#     for epochs_value in epochs_values:
-#         model.fit(np.array(train_x), np.array(train_y), epochs=epochs_value, batch_size=batch_size, verbose=0)
-#         evaluation_metrics = model.evaluate(np.array(validation_x), np.array(validation_y), verbose=0)
-#         print(f"Batch Size: {batch_size}, Epochs: {epochs_value}, Metrics: {evaluation_metrics}")
+# Generate and plot confusion matrix
+conf_mat = confusion_matrix(true_labels, predicted_labels)
+plt.figure(figsize=(8, 6))
+sns.heatmap(conf_mat, annot=True, fmt='d', cmap='Blues', xticklabels=classes, yticklabels=classes)
+plt.title('Confusion Matrix')
+plt.xlabel('Predicted Labels')
+plt.ylabel('True Labels')
+plt.show()
 
-
-end_time = time.time()
-# Calculate training duration
-training_duration = end_time - start_time
-print(f"Training Duration: {training_duration} seconds")
-
-
-# Monitor CPU and memory usage
-cpu_usage_percent = psutil.cpu_percent()
-memory_usage_percent = psutil.virtual_memory().percent
-print(f"CPU Usage: {cpu_usage_percent}% | Memory Usage: {memory_usage_percent}%")
-
-
+print("Model created and saved")
